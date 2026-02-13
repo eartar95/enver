@@ -1,0 +1,25 @@
+@Metadata.layer: #CUSTOMER
+annotate view ZEA_C_JOURNAL_ITEM with
+{
+  @UI.facet: [ { id:              'Item',
+                 purpose:         #STANDARD,
+                 type:            #IDENTIFICATION_REFERENCE,
+                 label:           'Item',
+                 position:        10 } ]
+  @UI: { lineItem: [{ position: 10}],identification: [{ position: 10 }] }
+  Bschl;
+  @UI: { lineItem: [{ position: 20}],identification: [{ position: 20 }] }
+  Sgtxt;
+  @UI: { lineItem: [{ position: 30}],identification: [{ position: 30 }] }
+  Wrbtr;
+  @UI: { lineItem: [{ position: 40}],identification: [{ position: 40 }] }
+  @Consumption.valueHelpDefinition: [{ entity: { name:'I_GLAccount', element: 'GLAccount'  } }]
+  Hkont;
+  @UI: { lineItem: [{ position: 50}],identification: [{ position: 50 }] }
+  @Consumption.valueHelpDefinition: [{ entity: { name:'I_CostCenter', element: 'CostCenter'  } }]
+  Kostl;
+  @UI: { lineItem: [{ position: 60}],identification: [{ position: 60 }] }
+  @Consumption.valueHelpDefinition: [{ entity: { name:'I_ProfitCenterStdVH', element: 'ProfitCenter'  } }]
+  Prctr;
+
+}

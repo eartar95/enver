@@ -1,0 +1,80 @@
+@Metadata.layer: #CUSTOMER   
+@UI.headerInfo: {
+    typeName: 'Academic Result Detail',
+    typeNamePlural: 'Academic Result Detail',
+    title: {
+        type: #STANDARD,
+        value: 'Course'
+    },
+    description: {
+        type: #STANDARD,
+        value: 'Semester'
+    }
+}
+//@UI.presentationVariant: [ { [ { by: 'Semester' }, { direction: #ASC } }
+
+       
+@Search.searchable: true
+annotate view ZEA_C_ACADEMIC
+    with 
+{
+  
+//   @UI.facet: [ { id: 'AcademicResult',
+//                  purpose: #STANDARD,
+//                  type: #IDENTIFICATION_REFERENCE,
+//                  label: 'Academic Result Details',
+//                  position: 10
+//    } ]
+   
+       @UI.facet: [ { position: 10, type: #IDENTIFICATION_REFERENCE, label: 'Academic' },
+                 { position: 20, type: #FIELDGROUP_REFERENCE, label: 'Course', targetQualifier: 'COU' },
+                 { position: 30, type: #FIELDGROUP_REFERENCE, label: 'Semester', targetQualifier: 'SEM' }  ]
+   @UI:{ identification: [ { position: 10, label: 'Student ID' } ] }
+   @UI.hidden: true
+   Id;
+   @UI: { lineItem: [ { position: 20, importance: #HIGH, label: 'Course' } ] }
+   @UI.fieldGroup: [ { position: 10, label: 'Course', qualifier: 'COU' } ]
+   @Search.defaultSearchElement: true
+   
+   @Consumption.valueHelpDefinition: [{ entity : {name : 'ZEA_I_COURSE', element: 'Value' } ,
+   additionalBinding: [{localElement: 'course_desc' , element: 'Description'}]
+   }]       //search help academic
+   
+   Course;
+   
+      @UI: { lineItem: [ { position: 30, importance: #HIGH, label: 'Course Desc' } ] }
+      @UI.fieldGroup: [ { position: 20, label: 'Course Desc', qualifier: 'COU' } ]
+   @Search.defaultSearchElement: true
+   course_desc;
+   
+      @UI: { lineItem: [ { position: 40, importance: #HIGH, label: 'Semester' } ] }
+       @UI.fieldGroup: [ { position: 10, label: 'Semester', qualifier: 'SEM' } ]
+   @Search.defaultSearchElement: true
+   
+    @Consumption.valueHelpDefinition: [{ entity : {name : 'ZEA_I_SEM', element: 'Value' } ,
+   additionalBinding: [{localElement: 'sem_desc' , element: 'Description'}]
+   }]       //search help academic
+   
+   Semester;
+   
+      @UI: { lineItem: [ { position: 50, importance: #HIGH, label: 'Sem Desc' } ] }
+      @UI.fieldGroup: [ { position: 20, label: 'Sem Desc', qualifier: 'SEM' } ]
+   @Search.defaultSearchElement: true
+   sem_desc;
+      @UI: { lineItem: [ { position: 60, importance: #HIGH, label: 'Status' } ] ,
+   identification: [ { position: 60, label: 'Status' } ] }
+   @Search.defaultSearchElement: true
+   
+   
+       @Consumption.valueHelpDefinition: [{ entity : {name : 'ZEA_I_SEMRES', element: 'Value' } ,
+   additionalBinding: [{localElement: 'semres_desc' , element: 'Description'}]
+   }]       //search help academic
+   
+   Semresult;
+   
+         @UI: { lineItem: [ { position: 70, importance: #HIGH, label: '' } ] ,
+   identification: [ { position: 70, label: '' } ] }
+   @Search.defaultSearchElement: true
+   semres_desc;
+   
+}

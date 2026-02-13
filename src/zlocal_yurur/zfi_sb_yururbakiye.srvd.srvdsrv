@@ -1,0 +1,4 @@
+@EndUserText.label: 'ZFI - Yürür Bakiye Service Def'
+define service ZFI_SB_YURURBAKIYE {
+  expose ZFI_C_Statement;
+}

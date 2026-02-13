@@ -1,0 +1,6 @@
+@EndUserText.label: 'Service Definition for Student'
+define service ZEA_EXPOSE_STUD {
+  expose ZEA_C_STUDENT    as Student;
+  expose ZEA_C_ACADEMIC   as AcademicResult;
+  expose ZEA_C_ATTACHMENT as Attachment;
+}

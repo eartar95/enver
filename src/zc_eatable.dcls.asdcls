@@ -1,0 +1,6 @@
+@EndUserText.label: 'ZC_EATABLE'
+@MappingRole: true
+define role ZC_EATABLE {
+  grant select on ZC_EATABLE
+  where INHERITING CONDITIONS FROM ENTITY ZR_EATABLE REPLACING { ROOT WITH _BaseEntity };
+}

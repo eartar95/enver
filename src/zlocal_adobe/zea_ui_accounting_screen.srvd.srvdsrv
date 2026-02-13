@@ -1,0 +1,4 @@
+@EndUserText.label: 'Accounting Screen UI'
+define service ZEA_UI_ACCOUNTING_SCREEN {
+  expose ZEA_UI_ACCOUNTING;
+}

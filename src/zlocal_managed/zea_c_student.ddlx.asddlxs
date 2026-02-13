@@ -1,0 +1,93 @@
+@Metadata.layer: #CUSTOMER
+@UI.headerInfo: {
+    typeName: 'Kişi',
+    typeNamePlural: 'Kişiler',
+    title: {
+        type: #STANDARD,
+        value: 'Fullname'
+    },
+    description: {
+        type: #STANDARD,
+        value: 'Course'
+    }
+}
+
+annotate entity ZEA_C_STUDENT with
+{
+
+               
+  @UI.facet: [ { position: 10, type: #IDENTIFICATION_REFERENCE, label: 'Öğrenci bilgileri' },
+                 { position: 20, type: #FIELDGROUP_REFERENCE, label: 'Kişi bilgileri', targetQualifier: 'PERS' },
+                 { position: 30, type: #FIELDGROUP_REFERENCE, label: 'Kurs bilgileri', targetQualifier: 'COUR' },
+                 { position: 40, type: #LINEITEM_REFERENCE, label: 'Academic Results', targetElement: '_academicres' },
+                 { position: 50, type: #LINEITEM_REFERENCE, label: 'Upload Attachments', targetElement: '_Attachments' }
+                    ]
+  @UI : { selectionField: [{ position: 10 }],
+          lineItem : [ { position : 10 , label : 'Student ID' } ],
+          identification : [ { position : 10 , label : 'Student ID' } ]
+  }
+  Id;
+
+  @UI : { lineItem : [ { position : 20 , label : 'Firstname' } ],
+      identification : [ { position : 20 , label : 'Firstname' } ]
+  }
+  Firstname;
+  @UI : { lineItem : [ { position : 30 , label : 'Lastname' } ],
+      identification : [ { position : 30 , label : 'Lastname' } ]
+  }
+  Lastname;
+  @UI : { lineItem : [ { position : 40 , label : 'Age' } ] }
+  @UI.fieldGroup: [{ position: 10, label: 'Age', qualifier: 'PERS' }]
+  Age;
+  @UI : { lineItem : [ { position : 50 , label : 'Course' } ] }
+//  @UI.fieldGroup: [{ position: 10, label: 'Course', qualifier: 'COUR' }]
+  @UI.identification : [{  position : 50 , label : 'Course'   } ]
+
+  @Consumption.valueHelpDefinition: [{ entity: { name: 'ZEA_I_COURSE' , element: 'Value'},
+  distinctValues: true,
+  additionalBinding: [{ localElement: 'Course' , element: 'Description' , usage: #FILTER_AND_RESULT }]
+  }]      //search help için olştr. data definition yazılır
+
+  Course;
+  @UI : { lineItem : [ { position : 60 , label : 'Course duration' } ] }
+//  @UI.fieldGroup: [{ position: 20, label: 'Course duration', qualifier: 'COUR' }]
+ @UI.identification : [{  position : 60 , label : 'Course duration'   } ]
+  Courseduration;
+  @UI : { lineItem : [ { position : 70 , label : 'Total Duration' } ],
+  identification : [ { position : 70 , label : 'Total  Duration' } ]
+  }
+  TotalDuration;
+  @UI : { lineItem : [ { position : 80 , label : 'Status' } 
+
+   ],
+
+      identification : [ { position : 80 , label : 'Status' }
+       ]
+  }
+
+
+
+
+  Status;
+
+  @UI : { lineItem : [ { position : 90 , label : 'Gender' } ] }
+  @UI.fieldGroup: [{ position: 20, label: 'Gender', qualifier: 'PERS' }]
+
+  @Consumption.valueHelpDefinition: [{ entity: { name: 'ZEA_I_GENDER' , element: 'Value'},
+  distinctValues: true,
+  additionalBinding: [{ localElement: 'Genderdesc' , element: 'Description' , usage: #FILTER_AND_RESULT }]
+    }]    //search help için olştr. data definition yazılır
+
+  Gender;
+
+  @UI: { lineItem : [ { position : 100 , label : 'Gender Desc' } ],
+  identification: [{ position: 100 , label : 'Gender Desc'  }] }
+
+  Genderdesc;
+  @UI : { lineItem : [ { position : 110 , label : 'Dob' } ],
+      identification : [ { position : 110 , label : 'Dob' } ]
+  }
+  Dob;
+
+
+}

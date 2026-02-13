@@ -1,0 +1,218 @@
+
+@Metadata.layer: #CUSTOMER
+@EndUserText.label: 'ZFI - Statement UI (Single Definition) + Param Value Help'
+
+/* =========================
+   Header
+   ========================= */
+@UI.headerInfo: {
+  typeName:       'Rapor Kalemi',
+  typeNamePlural: 'Yürür Bakiye Raporu',
+  title:       { type: #STANDARD, value: 'kunnr' },
+  description: { value: 'row_text' }
+}
+
+annotate view ZFI_C_Statement with
+
+  /* =========================================================
+     PARAMETER VALUE HELPS (Search help'ler CDS içinde değil, burada)
+     Syntax: ANNOTATE VIEW ... WITH PARAMETERS ...
+     ========================================================= */
+  parameters
+    @Consumption.valueHelpDefinition: [{
+      entity: { name: 'I_Ledger', element: 'Ledger' }
+    }]
+    p_source_ledger,  
+    @Consumption.valueHelpDefinition: [{
+      entity: { name: 'I_CompanyCode', element: 'CompanyCode' }
+    }]
+    p_bukrs
+    
+//    @Consumption.valueHelpDefinition: [{
+//      entity: { name: 'I_GLAccount', element: 'GLAccount' }
+//    }]
+//    p_racct,
+//
+//
+//    @Consumption.valueHelpDefinition: [{
+//      entity: { name: 'I_SpecialGLCode', element: 'SpecialGLCode' }
+//    }]
+//    p_umskz,
+//    
+//   @Consumption.valueHelpDefinition: [{
+//      entity: { name: 'I_Customer', element: 'Customer' }
+//    }]
+//    p_kunnr,
+//    
+//      @Consumption.valueHelpDefinition: [{
+//      entity: { name: 'I_Supplier', element: 'Supplier' }
+//    }]
+//    p_lifnr 
+
+{
+  /* =========================================================
+     FACETS (2 adet)
+     ========================================================= */
+  @UI.facet: [
+    { id: 'General', purpose: #STANDARD, type: #IDENTIFICATION_REFERENCE, label: 'Genel Bilgi', position: 10 }
+//    { id: 'Lines',   purpose: #STANDARD, type: #LINEITEM_REFERENCE,        label: 'Satırlar',    position: 20 }
+  ]
+
+  /* =========================================================
+     FIELDS - HER ALAN SADECE 1 KEZ
+     (lineItem + identification aynı blokta)
+     ========================================================= */
+
+  @UI: {
+    identification: [ { position: 10, label: 'Satır Tipi' } ],
+    lineItem:       [ { position: 10, label: 'Satır Tipi' } ]
+  }
+  row_text;
+  
+//@Consumption.valueHelpDefinition: [
+//  { entity: { name: 'I_Customer', element: 'Customer' }, label: 'Müşteri' },
+//  { entity: { name: 'I_Supplier', element: 'Supplier' }, label: 'Satıcı', qualifier: 'SUP' }
+//]
+
+@EndUserText.label: 'Müşteri/Satıcı'
+@Consumption.valueHelpDefinition: [
+  { entity: { name: 'I_BusinessPartnerVH', element: 'BusinessPartner' }, label: 'Müşteri/Satıcı' }
+]
+    
+  @UI: {
+    selectionField: [ { position: 10  } ],
+    identification: [ { position: 20, label: 'Partner' } ],
+    lineItem:       [ { position: 20, label: 'Partner' } ]
+  }
+  kunnr;
+
+  @UI: {
+    identification: [ { position: 30, label: 'Şirket Kodu' } ]
+  }
+  bukrs;
+
+  @UI: {
+    identification: [ { position: 40, label: 'Belge No' } ],
+    lineItem:       [ { position: 30, label: 'Belge No' } ]
+  }
+  belnr;
+
+  @UI: {
+    identification: [ { position: 50, label: 'Kayıt Tarihi (BUDAT)' } ],
+    lineItem:       [ { position: 40, label: 'Kayıt Tarihi' } ]
+  }
+  budat;
+
+  @UI: {
+    identification: [ { position: 60, label: 'Belge Tarihi (BLDAT)' } ],
+    lineItem:       [ { position: 45, label: 'Belge Tarihi' } ]
+  } 
+  bldat;
+
+  
+@Consumption.valueHelpDefinition: [{
+  entity: { name: 'I_GLAccount', element: 'GLAccount' }
+}]
+  
+  @UI: {
+    selectionField: [ { position: 20 } ],
+    identification: [ { position: 70, label: 'Ana Hesap (RACCT)' } ],
+    lineItem:       [ { position: 50, label: 'Ana Hesap' } ]
+  }
+  racct;
+
+  @UI: {
+    identification: [ { position: 80, label: 'Ana Hesap Metni' } ],
+    lineItem:       [ { position: 60, label: 'Hesap Metni' } ]
+  }
+  txt50;
+
+  @UI: {
+    identification: [ { position: 90, label: 'Karşı Hesap' } ],
+    lineItem:       [ { position: 70, label: 'Karşı Hesap' } ]
+  }
+  gkont;
+
+  @UI: {
+    identification: [ { position: 100, label: 'Karşı Hesap Adı' } ]
+  }
+  gkont_name;
+
+  @Consumption.valueHelpDefinition: [{
+  entity: { name: 'I_SpecialGLCode', element: 'SpecialGLCode' }
+}]
+  @UI: {
+    selectionField: [ { position: 30 } ],
+    identification: [ { position: 110, label: 'ÖDK' } ],
+    lineItem:       [ { position: 80, label: 'ÖDK' } ]
+  }
+  umskz;
+
+  @UI: {
+    identification: [ { position: 120, label: 'Kalem Metni' } ]
+  }
+  sgtxt;
+
+  @UI: {
+    identification: [ { position: 200, label: 'Borç (TRY)' } ],
+    lineItem:       [ { position: 90,  label: 'Borç (TRY)' } ]
+  }
+  borc_tr;
+
+  @UI: {
+    identification: [ { position: 210, label: 'Alacak (TRY)' } ],
+    lineItem:       [ { position: 100, label: 'Alacak (TRY)' } ]
+  }
+  alacak_tr;
+
+  @UI: {
+    identification: [ { position: 220, label: 'Toplam (TRY)' } ],
+    lineItem:       [ { position: 110, label: 'Toplam (TRY)' } ]
+  }
+  toplam_tr;
+  
+    @UI: {
+    identification: [ { position: 230, label: 'Borç (EUR)' } ],
+    lineItem:       [ { position: 120, label: 'Borç (EUR)' } ]
+  }
+  borc_eur;
+  
+    @UI: {
+    identification: [ { position: 240, label: 'Alacak (EUR)' } ],
+    lineItem:       [ { position: 130, label: 'Alacak (EUR)' } ]
+  }
+  alacak_eur;
+
+  @UI: {
+    identification: [ { position: 250, label: 'Toplam (EUR)' } ],
+    lineItem:       [ { position: 140, label: 'Toplam (EUR)' } ]
+  }
+  toplam_eur;
+  
+    @UI: {
+    identification: [ { position: 260, label: 'Borç(USD)' } ],
+    lineItem:       [ { position: 150, label: 'Borç (USD)' } ]
+  }
+  borc_usd;
+  
+      @UI: {
+    identification: [ { position: 270, label: 'Alacak (USD)' } ],
+    lineItem:       [ { position: 160, label: 'Alacak (USD)' } ]
+  }
+  alacak_usd;
+
+  @UI: {
+    identification: [ { position: 280, label: 'Toplam (USD)' } ],
+    lineItem:       [ { position: 170, label: 'Toplam (USD)' } ]
+  }
+  toplam_usd;
+
+  /* =========================================================
+     Teknik alanlar - gizle
+     ========================================================= */
+  @UI.hidden: true
+  RecordKey;
+
+  @UI.hidden: true
+  row_type;
+};

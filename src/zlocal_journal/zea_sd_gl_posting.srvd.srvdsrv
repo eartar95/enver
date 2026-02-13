@@ -1,0 +1,5 @@
+@EndUserText.label: 'Service definition for GL Posting'
+define service ZEA_SD_GL_POSTING {
+  expose ZEA_C_JOURNAL;
+  expose ZEA_C_JOURNAL_ITEM;
+}

@@ -1,0 +1,110 @@
+
+managed implementation in class zbp_ea_i_student unique;
+strict ( 2 ); //draft table varken kapatılıyor
+
+
+with draft;
+
+
+define behavior for ZEA_I_STUDENT alias Student
+persistent table zea_student
+draft table zea_dr_student
+lock master
+total etag Locallastchangedat
+authorization master ( instance )
+//authorization master ( global )
+etag master Lastchangedat
+{
+  create;
+  update ( precheck );
+  delete;
+
+
+  draft action Edit;
+  draft action Activate optimized;
+  draft action Discard;
+  draft action Resume;
+  draft determine action Prepare;
+
+
+
+  association _Attachments { create; with draft; }
+  association _academicres { create; with draft; }
+
+  field ( numbering : managed, readonly ) id; // numaralandırma id'ye göre
+  field ( readonly ) Genderdesc;
+  action ( features : instance, authorization : update ) Kabul result [1] $self; //action
+  //  action ( features : instance ) Kabul result [1] $self; //action
+  validation validateAge on save { field Age; create; update; } //classta gösterilir.Hangi adımda oldugu belirtilir.
+  //  determination updateCourseDuration on save { field Course; }
+  determination updateCourseDuration1 on modify { field Course; create; } side effects { field Course affects field Courseduration; }
+
+  mapping for zea_student
+    {
+      id                 = Id;
+      firstname          = Firstname;
+      lastname           = Lastname;
+      age                = Age;
+      course             = Course;
+      courseduration     = Courseduration;
+      status             = Status;
+      gender             = Gender;
+      dob                = Dob;
+      lastchangedat      = Lastchangedat;
+      locallastchangedat = Locallastchangedat;
+    }
+}
+
+define behavior for ZEA_I_ACADEMIC alias AcademicResult
+
+
+persistent table zea_academic
+draft table zea_dr_academic
+lock dependent by _student
+authorization dependent by _student
+
+{
+
+  update;
+  delete;
+
+  association _student { with draft; }
+
+
+
+  field ( readonly ) id;
+  field ( readonly ) Course;
+  field ( readonly ) course_desc;
+  //  field ( readonly ) Semester;
+  field ( readonly ) sem_desc;
+  field ( readonly ) semres_desc;  // Değişime kapalı
+
+
+
+}
+
+define behavior for ZEA_I_ATTACHMENT alias Attachment
+persistent table zea_attachment
+draft table zea_dr_attach
+lock dependent by _Student
+authorization dependent by _Student
+etag master LastChangedat
+{
+
+  update;
+  delete;
+  field ( readonly ) Id;
+
+  association _Student { with draft; }
+
+  mapping for zea_attachment
+    {
+      AttachId   = attach_id;
+      Attachment = attachment;
+      Comments   = comments;
+      Filename   = filename;
+      Id         = id;
+      Mimetype   = mimetype;
+    }
+
+}

@@ -1,0 +1,11 @@
+@EndUserText: {
+  label: 'Şunun için servis tanımı: ZC_EATABLE'
+}
+@ObjectModel: {
+  leadingEntity: {
+    name: 'ZC_EATABLE'
+  }
+}
+define service ZUI_EATABLE_O4 provider contracts odata_v4_ui {
+  expose ZC_EATABLE as Deneme;
+}

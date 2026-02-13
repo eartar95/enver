@@ -1,0 +1,55 @@
+managed with additional save
+implementation in class zea_cl_journal unique;
+strict ( 2 );
+with draft;
+
+
+define behavior for ZEA_I_JOURNAL //alias <alias_name>
+//persistent table zea_journal_h
+with unmanaged save
+draft table zea_dr_journal_h
+lock master
+total etag LastChangedAt
+authorization master ( instance )
+etag master LocalLastChangedAt
+{
+  create;
+  update;
+  delete;
+
+  association _Item { create; with draft; }
+  draft action Resume;
+  draft action Edit;
+  draft action Activate optimized;
+  draft action Discard;
+  draft determine action Prepare;
+
+  determination Post on save { create; }
+  mapping for zea_journal_h corresponding;
+
+  field ( readonly, numbering : managed ) Uuid;
+  field ( readonly ) belnr;
+
+
+action UploadXlsx deep parameter ZEA_D_UPLOAD_XLSX result [1] $self;
+side effects {
+  action UploadXlsx affects entity _Item;
+}
+
+
+}
+
+define behavior for ZEA_I_JOURNAL_ITEM //alias <alias_name>
+persistent table zea_journal_i
+draft table zea_dr_journal_i
+lock dependent by _Header
+authorization dependent by _Header
+etag master ItemLastChangedAt
+{
+  update;
+  delete;
+  field ( readonly ) Uuid, Sgtxt, Wrbtr, Hkont, Kostl, Prctr;
+  field ( mandatory: create,readonly : update ) Bschl;
+  association _Header { with draft; }
+  mapping for zea_journal_i corresponding;
+}
