@@ -1,4 +1,0 @@
-@EndUserText.label: 'Customer service definition'
-define service ZEA_UI_CUSTOMER {
-  expose ZEA_C_CUSTOMER;
-}

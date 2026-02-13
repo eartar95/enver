@@ -1,4 +1,0 @@
-@EndUserText.label: 'Yürür bakiye Service Def.'
-define service ZFI_EXPOSE_YURUR {
-  expose ZEA_C_ACADEMIC;
-}

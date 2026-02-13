@@ -1,8 +1,0 @@
-
-abstract;
-strict(2);
-with hierarchy;
-define behavior for ZEA_D_UPLOAD_XLSX
-{
-  association _StreamProperties with hierarchy;
-}

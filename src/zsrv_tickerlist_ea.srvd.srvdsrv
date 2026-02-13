@@ -1,4 +1,0 @@
-@EndUserText.label: 'Ticker list service'
-define service ZSRV_TICKERLIST_EA {
-  expose ZI_TICKERLIST_EA;
-}

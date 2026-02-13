@@ -1,5 +1,0 @@
-@EndUserText.label: 'Accounting Service def'
-define service ZEA_UI_ACCOUNTING {
-  expose ZEA_I_HDR_ACCOUNTING;
-  expose ZEA_I_ITEM_ACCOUNTING;
-}

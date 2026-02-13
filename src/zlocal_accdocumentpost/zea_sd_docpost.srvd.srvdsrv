@@ -1,5 +1,0 @@
-@EndUserText.label: 'Document Posting OData Service'
-define service ZEA_SD_DOCPOST {
-  expose ZEA_C_DOCPOST     as Header;
-  expose ZEA_C_DOCPOST_ITM as Items;
-}

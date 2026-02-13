@@ -1,6 +1,0 @@
-@EndUserText.label: 'ZR_EATABLE'
-@MappingRole: true
-define role ZR_EATABLE {
-  grant select on ZR_EATABLE
-  where TRUE;
-}
